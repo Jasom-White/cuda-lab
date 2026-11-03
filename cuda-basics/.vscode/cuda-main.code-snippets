@@ -1,0 +1,42 @@
+{
+  "CUDA main skeleton": {
+    "prefix": "cumain",
+    "body": [
+      "int main(int argc, char** argv) {",
+      "\tconst int n = (argc > 1) ? atoi(argv[1]) : (1 << 20);",
+      "\tconst size_t bytes = (size_t)n * sizeof(float);",
+      "\tconst int T = 256, B = (n + T - 1) / T;",
+      "",
+      "\tfloat *h_a = (float*)malloc(bytes), *h_b = (float*)malloc(bytes), *h_c = (float*)malloc(bytes);",
+      "\tsrand(0);",
+      "\tfor (int i = 0; i < n; ++i) { h_a[i] = (float)rand() / RAND_MAX; h_b[i] = (float)rand() / RAND_MAX; }",
+      "",
+      "\tfloat *d_a = dalloc(n), *d_b = dalloc(n), *d_c = dalloc(n);",
+      "\tCUDA_CHECK(cudaMemcpy(d_a, h_a, bytes, cudaMemcpyHostToDevice));",
+      "\tCUDA_CHECK(cudaMemcpy(d_b, h_b, bytes, cudaMemcpyHostToDevice));",
+      "",
+      "\t${1:kernel}<<<B, T>>>(${2:d_a, d_b, d_c, n});",
+      "\tCUDA_CHECK(cudaGetLastError());",
+      "\tCUDA_CHECK(cudaDeviceSynchronize());",
+      "",
+      "\tCUDA_CHECK(cudaMemcpy(h_c, d_c, bytes, cudaMemcpyDeviceToHost));",
+      "\tdouble max_err = 0.0;",
+      "\tfor (int i = 0; i < n; ++i) {",
+      "\t\tdouble ref = (double)h_a[i] + (double)h_b[i];",
+      "\t\tdouble err = fabs((double)h_c[i] - ref);",
+      "\t\tif (err > max_err) max_err = err;",
+      "\t}",
+      "\tprintf(\"check: n=%d max_err=%.3e %s\\\\n\", n, max_err, max_err < 1e-5 ? \"PASS\" : \"FAIL\");",
+      "",
+      "\tfloat ms = bench_ms([&] { ${3:kernel}<<<B, T>>>(${4:d_a, d_b, d_c, n}); }, 100);",
+      "\tprintf(\"perf: %.4f ms/iter %.1f GB/s\\\\n\", ms, 3.0 * bytes / (ms * 1e-3) / 1e9);",
+      "",
+      "\tcudaFree(d_a); cudaFree(d_b); cudaFree(d_c);",
+      "\tfree(h_a); free(h_b); free(h_c);",
+      "\treturn 0;",
+      "}",
+      ""
+    ],
+    "description": "CUDA main skeleton: data -> H2D -> launch -> D2H -> verify -> time -> free"
+  }
+}

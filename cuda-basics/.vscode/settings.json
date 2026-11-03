@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "*.cu": "cuda-cpp",
+    "*.cuh": "cuda-cpp"
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "C_Cpp.default.cppStandard": "c++17"
+}

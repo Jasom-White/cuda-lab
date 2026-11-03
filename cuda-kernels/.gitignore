@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+build/
+*.so
+*.pyd
+*.obj
+*.exp
+*.lib
+.venv/

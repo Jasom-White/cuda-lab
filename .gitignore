@@ -1,0 +1,26 @@
+# repo root is the workspace; track ONLY the CUDA work
+/*
+!.gitignore
+!README.md
+!cuda-basics/
+!cuda-kernels/
+
+# build artifacts
+*.exe
+*.lib
+*.exp
+*.obj
+*.ilk
+*.pdb
+*.dll
+*.pyd
+*.so
+*.o
+build/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+.cache/
+.DS_Store

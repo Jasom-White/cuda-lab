@@ -1,0 +1,65 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CUDA: check_env",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "dev.bat",
+        "check_env.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CUDA: first_kernel",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "dev.bat",
+        "first_kernel.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CUDA: bench_bw",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "dev.bat",
+        "bench_bw.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CUDA: run current file",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "dev.bat",
+        "${fileBasename}"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

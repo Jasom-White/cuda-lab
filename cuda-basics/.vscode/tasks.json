@@ -1,0 +1,62 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CUDA: build current .cu",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "build.bat",
+        "${fileBasename}",
+        "-o",
+        "${fileBasenameNoExtension}.exe"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "group": "build",
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "CUDA: build & run current .cu",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "buildrun.bat",
+        "${fileBasename}"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "focus": true
+      },
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "CUDA: memcheck current .cu (compute-sanitizer)",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "memcheck.bat",
+        "${fileBasename}"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

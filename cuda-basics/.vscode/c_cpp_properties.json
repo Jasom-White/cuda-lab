@@ -1,0 +1,18 @@
+{
+  "configurations": [
+    {
+      "name": "Win32-CUDA",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8/include"
+      ],
+      "defines": [
+        "__CUDACC__"
+      ],
+      "intelliSenseMode": "windows-msvc-x64",
+      "cStandard": "c17",
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
+}

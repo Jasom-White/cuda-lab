@@ -1,0 +1,21 @@
+{
+  "configurations": [
+    {
+      "name": "Win32-CUDA",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8/include",
+        "C:/Users/lenovo/AppData/Local/Programs/Python/Python311/Lib/site-packages/torch/include",
+        "C:/Users/lenovo/AppData/Local/Programs/Python/Python311/Lib/site-packages/torch/include/torch/csrc/api/include"
+      ],
+      "defines": [
+        "__CUDACC__",
+        "TORCH_EXTENSION_NAME=dsh_ext"
+      ],
+      "intelliSenseMode": "windows-msvc-x64",
+      "cStandard": "c17",
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
+}
