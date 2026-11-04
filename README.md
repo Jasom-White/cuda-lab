@@ -14,8 +14,8 @@ CUDA 练习与 DiffHRG 原型（RTX 5060 Laptop 8GB / sm_120 / CUDA 12.8 / torch
 | vector add（grid-stride，4096 blocks） | 1M | 1128 GB/s | 12 MB 全在 L2 |
 | vector add（grid-stride） | 64M | 352 GB/s | HBM，≈ 理论峰值 448 的 79% |
 | vector add（naive，ceil(n/256) blocks） | 64M | 355 GB/s | 与 grid-stride 基本持平 |
-| transpose（naive） | 4096² | 70.2 GB/s | strided write，不合并 |
-| transpose（tiled + padding） | 4096² | 183.2 GB/s（2.61×） | 读/写都合并，+1 防 bank conflict |
+| transpose（naive） | 4096² | 125.5 GB/s | strided write，不合并 |
+| transpose（tiled + padding） | 4096² | 241.6 GB/s（1.93×） | 读/写都合并，+1 防 bank conflict |
 | reduction（warp shuffle + 两趟） | 2²⁷ | 375.6 GB/s | ≈ torch.sum 372.8 |
 | row softmax | 1024×4096 | 348 GB/s（1.30× torch） | 数值稳定 |
 | LeetGPU 风格 vector add（solve 入口） | 16M | 353.5 GB/s | 与平台模板同构 |
