@@ -17,6 +17,7 @@ CUDA 练习与 DiffHRG 原型（RTX 5060 Laptop 8GB / sm_120 / CUDA 12.8 / torch
 | transpose（naive） | 4096² | 125.5 GB/s | strided write，不合并 |
 | transpose（tiled + padding） | 4096² | 241.6 GB/s（1.93×） | 读/写都合并，+1 防 bank conflict |
 | reduction（warp shuffle + 两趟） | 2²⁷ | 375.6 GB/s | ≈ torch.sum 372.8 |
+| reduction（day04 CUDA：atomic / warp / two-pass） | 2²⁷ | atomic 3.2 GB/s；warp 366.8；two-pass 362.6（约 113×） | warp shuffle + shared 归约 + 两趟无 atomic |
 | row softmax | 1024×4096 | 348 GB/s（1.30× torch） | 数值稳定 |
 | LeetGPU 风格 vector add（solve 入口） | 16M | 353.5 GB/s | 与平台模板同构 |
 
