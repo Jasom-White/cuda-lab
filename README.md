@@ -21,6 +21,7 @@ CUDA 练习与 DiffHRG 原型（RTX 5060 Laptop 8GB / sm_120 / CUDA 12.8 / torch
 | stencil 5-point（32×32 block） | 4096² | naive 165.3 / tiled 116.1 GB/s | shared 版反而更慢（见下条） |
 | stencil 5-point（32×8 block） | 4096² | naive 292.8 / tiled 170.9 GB/s | block 形状影响 occupancy；naive 靠 L1/L2 命中 |
 | GEMM（naive / shared tiled 16×16） | 1024³ | naive 624.7 GFLOPS；tiled 860.0（1.38×） | shared 减少 global 读；未做寄存器分块 |
+| SpMV（CSR 5 点 Laplacian，1024²） | nnz=5.24M | row_per_thread **349.0 GB/s**；row_per_warp 57.6 GB/s | 每行仅 5 nnz → row-per-warp 的 32 lane 只用 5 个（16%），适合长行 |
 | row softmax | 1024×4096 | 348 GB/s（1.30× torch） | 数值稳定 |
 | LeetGPU 风格 vector add（solve 入口） | 16M | 353.5 GB/s | 与平台模板同构 |
 
