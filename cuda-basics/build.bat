@@ -16,4 +16,4 @@ if "%VCVARS%"=="" (
 call "%VCVARS%" >nul
 set "VSLANG=1033"
 set "PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\bin;%PATH%"
-nvcc -arch=sm_120 -O3 %*
+nvcc -arch=sm_120 -O3 -Xcompiler /utf-8 %*
